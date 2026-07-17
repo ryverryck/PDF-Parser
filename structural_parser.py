@@ -26,7 +26,9 @@ def detect_columns(page):
     last_x = None
 
     for block in blocks:
-        x0, y0, x1, y1, text, *_ = block  # Adjusted unpacking to handle variable-length tuples
+        # Unpack the first 5 elements directly; ignore the rest
+          block_data = block
+          x0, y0, x1, y1, text = block_data[0], block_data[1], block_data[2], block_data[3], block_data[4]  # Adjusted unpacking to handle variable-length tuples
         if last_x is not None and (x0 - last_x) > 50:  # X-gap > 50px
             columns.append(current_column)
             current_column = []
